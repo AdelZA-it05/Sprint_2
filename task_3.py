@@ -1,6 +1,4 @@
-total = 0
 class PointsForPlace:
-    points = 0
 
     @staticmethod
     def get_points_for_place(place):
@@ -14,7 +12,6 @@ class PointsForPlace:
         return points
 
 class PointsForMeters:
-    points = 0
 
     @staticmethod
     def get_points_for_meters(meters):
@@ -26,30 +23,14 @@ class PointsForMeters:
         return points
 
 class TotalPoints(PointsForPlace, PointsForMeters):
+    total = 0
     def __init__(self):
         PointsForPlace.__init__(self)
         PointsForMeters.__init__(self)
 
-    def get_points_for_place(self, place):
-        v_place = PointsForPlace.get_points_for_place(place)
-        global total
-        total += v_place
-        return v_place
-
-    def get_points_for_meters(self, meters):
-        v_meters = PointsForMeters.get_points_for_meters(meters)
-        global total
-        total += v_meters
-        return v_meters
-
     def get_total_points(self, place, meters):
-        v_place = PointsForPlace.get_points_for_place(place)
-        v_meters = PointsForMeters.get_points_for_meters(meters)
-        global total
-        total += v_place
-        total += v_meters
+        total = self.get_points_for_place(place) + self.get_points_for_meters(meters)
         return total
-
 
 
 points_for_place = PointsForPlace()
